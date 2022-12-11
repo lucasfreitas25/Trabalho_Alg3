@@ -1,9 +1,10 @@
 package com.example.application.views.cliente;
 
-//import com.vaadin.application.views.cliente.domain.DataService;
+import com.vaadin.demo.domain.DataService;
+import com.vaadin.demo.domain.Cliente;
 import com.example.application.repositories.ClienteRepository;
 import com.example.application.repositories.postgres.ClienteRepositoryImpl;
-//import java.util.List;
+import java.util.List;
 import com.example.application.entidades.Cliente;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.Key;
@@ -13,8 +14,6 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
-//import com.vaadin.flow.component.icon.Icon;
-//import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -35,7 +34,7 @@ public class ClienteView extends VerticalLayout {
     private Button limpabutton;
     // private TextField searchField;
     private Grid<Cliente> grid = new Grid<>(Cliente.class, false);
-    // List<Cliente> cliente = DataService.getcliente();
+    List<Cliente> cliente = DataService.getcliente();
     // private GridListDataView<Cliente> dataView = grid.setItems(cliente);
     private ClienteRepository repository = new ClienteRepositoryImpl();
     private Boolean teste = true;
@@ -128,7 +127,8 @@ public class ClienteView extends VerticalLayout {
          * });
          */
         grid.addColumn(Cliente::getNome)
-                .setHeader("Nome");
+                .setHeader("Nome")
+                .setFooter(String.format("%s Total", cliente.size()));
         grid.addColumn(Cliente::getEmail)
                 .setHeader("Email");
         grid.addColumn(Cliente::getCpf)

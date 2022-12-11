@@ -14,4 +14,6 @@ public interface ClienteRepository {
     public List<Cliente> listar();
 
     public List<Cliente> contadorClientes();
+
+    public List<Cliente> buscacliente(String c);
 }
